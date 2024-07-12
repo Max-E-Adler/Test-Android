@@ -43,35 +43,35 @@ func check_input(input_string, words_array):
 
 # This function takes in a string and returns a regex that matches for any number of characters,
 	# then the first character, then any number of characters, then the second character, and so on
-func create_in_regex(regInput):
-	var regString = "^"
+func create_in_regex(reg_input):
+	var reg_string = "^"
 	var counter = 0
-	for char in regInput:
-		regString+=".*" + regInput[counter].to_lower()
+	for char in reg_input:
+		reg_string+=".*" + reg_input[counter].to_lower()
 		counter+=1
-	regString+= ".*$"
+	reg_string+= ".*$"
 	var reg = RegEx.new()
-	reg.compile(regString)
+	reg.compile(reg_string)
 	return reg
 
 # This function takes in a string and returns a regex that matches for one characters,
 	# then the first character, then one characters, then the second character, and so on
-func create_perfect_regex(regInput):
-	var regString = "^"
+func create_perfect_regex(reg_input):
+	var reg_string = "^"
 	var counter = 0
-	for char in regInput:
-		regString+="." + regInput[counter].to_lower()
+	for char in reg_input:
+		reg_string+="." + reg_input[counter].to_lower()
 		counter+=1
-	regString+= ".$"
+	reg_string+= ".$"
 	var reg = RegEx.new()
-	reg.compile(regString)
+	reg.compile(reg_string)
 	return reg
 
-#Given a PSA array, sets the textbox of the wordslist to a 
-	#properly formatted output list of words
+#Given a PSA array, puts labels into LabelsContainer with strings in them to
+	#optimize performance
 func change_textbox(psa_array):#, line_limit):
 
-	#var start_time = Time.get_ticks_usec()
+	#var start_time = Time.get_ticks_usec() #this was used to time the function
 	for child in %LabelsContainer.get_children():
 		child.queue_free()
 	var good_words:PackedStringArray = psa_array[0]
@@ -145,7 +145,7 @@ func test(test_min, test_max, test_step):
 	
 	print("The lowest was when test_count was " + str(lowest_micros_count) + ", fastest speed was: " + str(lowest_micros))
 
-
+#when you press the button, it does the same thing as pressing enter
 func _on_button_pressed():
 	_on_text_input_text_submitted(%TextInput.text)
 
