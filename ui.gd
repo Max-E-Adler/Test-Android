@@ -4,34 +4,27 @@ extends Control
 @onready var test_file = "res://Text_assets/words_test.txt"
 var characters = 'abcdefghijklmnopqrstuvwxyz'
 
+#when the app opens, it generates a 3 character "word" and searches the dictionary for it
 func _ready():
-	#test(29,51,1)
-	
-	
 	var start_string = generate_word(characters, 3)
 	%TextInput.placeholder_text = start_string
 	var words_string = FileAccess.get_file_as_string(file)
 	var words_array = words_string.split("\r\n")
-	var psa_array = checkInput(start_string, words_array)
+	var psa_array = check_input(start_string, words_array)
 	change_textbox(psa_array)
-	
 
-#func filepath_to_filePSA(filepath):
-	#var filestring
-	#var words_string = FileAccess.get_file_as_string(filepath)
-	#var words_array = words_string.split("\r\n")
-	#return words_array
-
+#creates a random "word" of random length
 func generate_word(chars, length):
 	var word: String
 	var n_char = len(chars)
 	for i in range(length):
 		word += chars[randi()% n_char]
 	return word
+	
 #Given a string against which you may check, and an array of words (a dictionary),
 	#this func creates a regex to compare the two, and returns an array of PSAs, those
 	#arrays containing different strings fitting different conditions set by the "player"
-func checkInput(input_string, words_array):
+func check_input(input_string, words_array):
 	var good_words:PackedStringArray
 	var perfect_words:PackedStringArray
 	var reg = create_in_regex(input_string)
@@ -131,7 +124,7 @@ func change_textbox(psa_array):#, line_limit):
 func test(test_min, test_max, test_step):
 	var words_string = FileAccess.get_file_as_string(file)
 	var words_array = words_string.split("\r\n")
-	var psa_array = checkInput("", words_array)
+	var psa_array = check_input("", words_array)
 	var test_count = test_min
 	var microseconds:Array
 	var lowest_micros
@@ -164,5 +157,5 @@ func _on_text_input_text_submitted(new_text):
 	%TextInput.placeholder_text = new_text
 	var words_string = FileAccess.get_file_as_string(file)
 	var words_array = words_string.split("\r\n")
-	var psa_array = checkInput(new_text, words_array)
+	var psa_array = check_input(new_text, words_array)
 	change_textbox(psa_array)#, 50)
