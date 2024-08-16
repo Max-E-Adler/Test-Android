@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bsjyy7p68w8oi"]
 
-[ext_resource type="Script" path="res://ui.gd" id="1_cjfwv"]
+[ext_resource type="Script" path="res://scenes/ui.gd" id="1_cjfwv"]
 [ext_resource type="Theme" uid="uid://bnhngmri4tfgr" path="res://Other assets/kenneyUI-green.tres" id="1_i38ym"]
 
 [node name="Node2D" type="Control"]
